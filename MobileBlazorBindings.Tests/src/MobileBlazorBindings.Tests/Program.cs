@@ -11,14 +11,16 @@ namespace MobileBlazorBindings.Tests
             var page = await TestContext.Start<Counter>();
 
             var label = page.FindFirst<Label>();
+            var button = page.FindFirst<Button>();
+
             Assert.Equal("The button was clicked 0 times", label.Text);
 
-            page.FindFirst<Button>().Click();
+            button.Click();
 
             Assert.Equal("The button was clicked 1 times", label.Text);
             
-            page.FindFirst<Button>().Click();
-            page.FindFirst<Button>().Click();
+            button.Click();
+            button.Click();
             
             Assert.Equal("The button was clicked 3 times", label.Text);
         }
