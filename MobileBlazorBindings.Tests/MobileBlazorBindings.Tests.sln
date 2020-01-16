@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7CC0EFE3-4764-4A1E-B2E4-0BF1114712B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileBlazorBindings.Tests", "src\MobileBlazorBindings.Tests\MobileBlazorBindings.Tests.csproj", "{CC85BC23-C906-4B0E-9539-732CB84B891B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC85BC23-C906-4B0E-9539-732CB84B891B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC85BC23-C906-4B0E-9539-732CB84B891B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC85BC23-C906-4B0E-9539-732CB84B891B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC85BC23-C906-4B0E-9539-732CB84B891B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CC85BC23-C906-4B0E-9539-732CB84B891B} = {7CC0EFE3-4764-4A1E-B2E4-0BF1114712B3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B28C6D1A-CDDB-46C1-B19A-4212CCE05468}
+	EndGlobalSection
+EndGlobal
