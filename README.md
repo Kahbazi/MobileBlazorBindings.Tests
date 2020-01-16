@@ -8,7 +8,7 @@ Proof of concept for writing unit tests for Blazor Mobile Components.
 var page = await TestContext.Start<Counter>();
 
 var label = page.FindFirst<Label>();
-var button = page.FindFirst<Button>().Click();
+var button = page.FindFirst<Button>();
 
 Assert.Equal("The button was clicked 0 times", label.Text);
 
