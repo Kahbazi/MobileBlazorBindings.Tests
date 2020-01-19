@@ -27,7 +27,7 @@ namespace MobileBlazorBindings.Tests
 
             var renderer = new MobileBlazorBindingsRenderer(host.Services, host.Services.GetRequiredService<ILoggerFactory>());
 
-            await renderer.AddComponent<TComponent>(new ElementHandler(renderer, application)).ConfigureAwait(false);
+            await renderer.AddComponent<TestComponent<TComponent>>(new ElementHandler(renderer, application)).ConfigureAwait(false);
 
             application.SendStart();
 
