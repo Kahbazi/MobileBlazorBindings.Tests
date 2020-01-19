@@ -8,7 +8,8 @@ namespace MobileBlazorBindings.Tests
     {
         static async Task Main(string[] args)
         {
-            var page = await TestContext.Start<Counter>();
+            var testContext = new TestContextBuilder().Build();
+            var page = await testContext.Start<Counter>();
 
             var label = page.FindFirst<Label>();
             var button = page.FindFirst<Button>();
@@ -18,10 +19,10 @@ namespace MobileBlazorBindings.Tests
             button.Click();
 
             Assert.Equal("The button was clicked 1 times", label.Text);
-            
+
             button.Click();
             button.Click();
-            
+
             Assert.Equal("The button was clicked 3 times", label.Text);
         }
     }

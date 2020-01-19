@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,28 +11,30 @@ using Xamarin.Forms.Internals;
 
 namespace MobileBlazorBindings.Tests
 {
-    public static class TestContext
+    public class TestContext
     {
-        public static async Task<Page> Start<TComponent>() where TComponent : IComponent
+        private readonly IHost _host;
+        private readonly Application _application;
+
+        public TestContext(DeviceInfo deviceInfo, IPlatformServices platformServices, Func<Application> applicationFunc, IHost host)
         {
             DependencyService.Register<ISystemResourcesProvider, TestResourceProvider>();
+            Device.info = deviceInfo ?? throw new System.ArgumentNullException(nameof(deviceInfo));
+            Device.PlatformServices = platformServices ?? throw new System.ArgumentNullException(nameof(platformServices));
+            _application = applicationFunc?.Invoke() ?? throw new System.ArgumentNullException(nameof(applicationFunc));
+            Application.SetCurrentApplication(_application);
+            _host = host ?? throw new System.ArgumentNullException(nameof(host));
+        }
 
-            Device.info = new TestDeviceInfo();
-            Device.PlatformServices = new TestPlatformServices();
+        public async Task<Page> Start<TComponent>() where TComponent : IComponent
+        {
+            var renderer = new MobileBlazorBindingsRenderer(_host.Services, _host.Services.GetRequiredService<ILoggerFactory>());
 
-            TestApplication application = new TestApplication();
-            Application.SetCurrentApplication(application);
+            await renderer.AddComponent<TestComponent<TComponent>>(new ElementHandler(renderer, _application)).ConfigureAwait(false);
 
+            _application.SendStart();
 
-            var host = Host.CreateDefaultBuilder().Build();
-
-            var renderer = new MobileBlazorBindingsRenderer(host.Services, host.Services.GetRequiredService<ILoggerFactory>());
-
-            await renderer.AddComponent<TestComponent<TComponent>>(new ElementHandler(renderer, application)).ConfigureAwait(false);
-
-            application.SendStart();
-
-            return application.MainPage;
+            return _application.MainPage;
         }
     }
 }
